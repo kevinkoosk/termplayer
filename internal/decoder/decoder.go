@@ -1,15 +1,20 @@
 package decoder
 
 import (
-	"bufio"
 	"image"
-	"image/png"
+	"image/color"
+	"io"
 	"os/exec"
+)
+
+const (
+	Width = 160
+	Height = 90
 )
 
 type Stream struct {
 	cmd *exec.Cmd
-	reader *bufio.Reader
+	reader io.Reader
 }
 
 func New(video string) (*Stream, error) {
@@ -18,9 +23,9 @@ func New(video string) (*Stream, error) {
 		"ffmpeg",
 		"-loglevel", "quiet",
 		"-i", video,
-		"-vf", "fps=12",
-		"-f", "image2pipe",
-		"-vcodec", "png",
+		"-vf", "fps=10,scale=160:90",
+		"-pix_fmt", "rgb24",
+		"-f", "rawvideo",
 		"pipe:1",
 	)
 
@@ -35,14 +40,59 @@ func New(video string) (*Stream, error) {
 
 	return &Stream{
 		cmd: cmd,
-		reader: bufio.NewReader(out),
+		reader: out,
 	}, nil
 }
 
 func (s *Stream) NextFrame() (image.Image, error) {
-	return png.Decode(s.reader)
+	frameSize := Width * Height * 3
+	buf := make([]byte, frameSize)
+	_, err := io.ReadFull(s.reader, buf)
+	if err != nil {
+		return nil, err
+	}
+
+	img := image.NewRGBA(
+		image.Rect(
+			0,
+			0,
+			Width,
+			Height,
+		),
+	)
+
+	p := 0
+
+	for y := 0; y < Height; y++ {
+
+		for x := 0; x < Width; x++ {
+
+			r := buf[p]
+			g := buf[p+1]
+			b := buf[p+2]
+
+			p += 3
+
+			img.Set(
+				x,
+				y,
+				color.RGBA{
+					R: r,
+					G: g,
+					B: b,
+					A: 255,
+				},
+			)
+		}
+	}
+
+	return img, nil
 }
 
 func (s *Stream) Close() {
-	_ = s.cmd.Process.Kill()
+	if s.cmd != nil &&
+		s.cmd.Process != nil {
+
+		_ = s.cmd.Process.Kill()
+	}
 }

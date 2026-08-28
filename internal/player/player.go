@@ -14,6 +14,7 @@ func Play(video string) error {
 	stream, err := decoder.New(video)
 
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
@@ -30,12 +31,11 @@ func Play(video string) error {
 
 		frame, err :=
 			stream.NextFrame()
- 
+
 		if err != nil {
-			fmt.Println(err)
 			break
 		}
- 
+
 		w, h :=
 			terminal.Size()
 

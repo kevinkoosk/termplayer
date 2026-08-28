@@ -1,4 +1,4 @@
-# TermPlayer
+# TermPlayer 0.1b
 
 Video player for terminal.
 
@@ -25,8 +25,12 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version's decoder uses FFMPEG to generate PNG.
+This version's decoder uses FFMPEG to generate RGB. Moved away from PNG.
 
 ## About this app
 
 Copyright Kevin Koo Seng Kiat (C) 2026 with coding assistance from Microsoft Copilot.
+
+## Licence
+
+Licensed under MIT

@@ -1,11 +1,12 @@
 ﻿package terminal
 
 import "golang.org/x/term"
+import "os"
 
 func Size() (int, int) {
 
 	w, h, err :=
-		term.GetSize(0)
+		term.GetSize(int(os.Stdout.Fd()))
 
 	if err != nil {
 
