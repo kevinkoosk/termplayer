@@ -10,7 +10,9 @@ import (
 )
  
 func Play(video string) error {
- 
+
+	quit := ListenForQuit()
+
 	stream, err := decoder.New(video)
 
 	if err != nil {
@@ -26,6 +28,14 @@ func Play(video string) error {
 		time.Second / 12
  
 	for {
+
+		select {
+
+		case <-quit:
+			return nil
+
+		default:
+		}
 
 		start := time.Now()
 
