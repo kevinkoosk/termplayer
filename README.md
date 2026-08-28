@@ -13,6 +13,9 @@ At the terminal, type:
 termplayer video.mp4
 ```
 
+Type "q" followed by <Enter> to quit. 
+
+
 ## Compiling
 
 1. Ensure Go is installed.
