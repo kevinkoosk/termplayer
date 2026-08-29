@@ -44,8 +44,6 @@ If you want to view an image instead, type:
 termplayer image.jpg
 ```
 
-During playback, use "Q" to quit, and Spacebar to pause.
-
 
 
 ## Compiling
