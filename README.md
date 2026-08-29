@@ -1,4 +1,4 @@
-# TermPlayer 0.3.1
+# TermPlayer 0.3.2
 
 Video player for terminal. Vibe coded, free, and open source.
 
@@ -24,6 +24,7 @@ Also displays images.
 - Portrait mode
 - Also landscape mode
 - Also displays images (jpg, png, gif)
+- Player auto-resizes as you resize the window
 - Silent (no sound yet)
 
 ## Usage
@@ -56,7 +57,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version, we implemented image mode, so that it loads up jpg, png, and gif files, and displays them in the terminal (block-like art, of course).
+This version was focused on the auto-resizing capability. Surprisingly, we found that the app could already resize its output when the terminal window is resized. But on reflection, it was to be expected - we calculate the window size to render. The code for 0.3.2 is exactly the same as 0.3.1. But a milestone has been achieved.
 
 ## About this app
 
