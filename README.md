@@ -22,7 +22,8 @@ Vibe coded, free, and open source.
 - Pause support
 - Hidden cursor
 - Renderer optimization
-- Portrait mode!!
+- Portrait mode
+- Also landscape mode
 - Silent (no sound yet)
 
 ## Usage
