@@ -1,4 +1,4 @@
-# TermPlayer 0.2.4
+# TermPlayer 0.2.5
 
 Video player for terminal.
 
@@ -32,7 +32,8 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-In this update, we optimize the rendering engine. Rather than 1 call / write for every character, it's formed entirely as a string in the app, then written.
+In the last version (0.2.4) we used strings.Builder which helped optimize the rendering and made the player smoother. In this version (0.2.5), we drop frames to enhance the user experience. 
+
 
 ## About this app
 

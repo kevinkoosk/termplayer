@@ -33,6 +33,7 @@ func Play(video string) error {
 	defer stream.Close()
 
 	framesRendered := 0
+	framesDropped := 0
 	fps := 0.0
 	fpsTimer := time.Now()
 	paused := false
@@ -100,11 +101,19 @@ func Play(video string) error {
 
 		// Draw FPS on top row
 		fmt.Printf(
-			"\x1b[-2;1HFPS: %.1f  | Q Quit | Space Pause   ",
+			"\x1b[-2;1HFPS: %.1f | Drop: %d | Q Quit | Space Pause   ",
 			fps,
+			framesDropped,
 		)
 
 		elapsed := time.Since(start)
+
+		if elapsed > frameDuration {
+
+			framesDropped++
+
+			continue
+		}
 
 		if elapsed < frameDuration {
 
