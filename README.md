@@ -1,4 +1,4 @@
-# TermPlayer 0.2.3
+# TermPlayer 0.2.4
 
 Video player for terminal.
 
@@ -32,7 +32,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-Notice the screenshots in version 0.2.2 have a cursor? In version 0.2.3 we hide it until you exit the app. Then we show it again.
+In this update, we optimize the rendering engine. Rather than 1 call / write for every character, it's formed entirely as a string in the app, then written.
 
 ## About this app
 

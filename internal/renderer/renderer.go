@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"strings"
 	"github.com/nfnt/resize"
 )
 
@@ -28,7 +29,8 @@ func Draw(img image.Image, width, height int) {
 			resize.Lanczos3,
 		)
 
-	fmt.Print("\x1b[H")
+	var sb strings.Builder
+	sb.WriteString("\x1b[H")
 
 	for y := 0; y < resized.Bounds().Dy(); y += 2 {
 
@@ -42,12 +44,13 @@ func Draw(img image.Image, width, height int) {
 			bottom = resized.At(x, y+1)
 			}
 
-			fmt.Print(
-			ansiFgBg(top, bottom),
-			"▀",
+			sb.WriteString(
+				ansiFgBg(top, bottom),
 			)
+			sb.WriteRune('▀')
 		}
 
-		fmt.Print("\x1b[0m\n")
+		sb.WriteString(("\x1b[0m\n"))
 	}
+	fmt.Print(sb.String())
 }
