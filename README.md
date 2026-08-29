@@ -22,7 +22,7 @@ Vibe coded, free, and open source.
 - Pause support
 - Hidden cursor
 - Renderer optimization
-- Published GitHub repository
+- Silent (no sound yet)
 
 ## Usage
 
