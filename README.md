@@ -1,13 +1,14 @@
-# TermPlayer 0.3.0
+# TermPlayer 0.3.1
 
-Video player for terminal.
+Video player for terminal. Vibe coded, free, and open source.
 
-Vibe coded, free, and open source.
+Also displays images.
 
 ![screenshot of Termplayer](screenshot.png)
 
 ![screenshot of Termplayer](screenshot2.png)
 
+![recording of Termplayer](screenrecording.gif)
 
 ## Feature set
 
@@ -24,17 +25,27 @@ Vibe coded, free, and open source.
 - Renderer optimization
 - Portrait mode
 - Also landscape mode
+- Also displays images (jpg, png, gif)
 - Silent (no sound yet)
 
 ## Usage
 
-At the terminal, type:
+To view a video at the terminal, type:
 
 ```
 termplayer video.mp4
 ```
 
 During playback, use "Q" to quit, and Spacebar to pause.
+
+If you want to view an image instead, type:
+
+```
+termplayer image.jpg
+```
+
+During playback, use "Q" to quit, and Spacebar to pause.
+
 
 
 ## Compiling
@@ -49,7 +60,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-Managed to get Portrait Mode working. It involved changes in the decoder, renderer, and player.
+This version, we implemented image mode, so that it loads up jpg, png, and gif files, and displays them in the terminal (block-like art, of course).
 
 ## About this app
 
