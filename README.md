@@ -9,6 +9,21 @@ Vibe coded, free, and open source.
 ![screenshot of Termplayer](screenshot2.png)
 
 
+## Feature set
+
+- RGB24 decoding
+- Terminal truecolor output
+- Half-block renderer
+- Reusable image buffers
+- Reusable frame buffers
+- FPS counter
+- Drop counter
+- Single-key controls
+- Pause support
+- Hidden cursor
+- Renderer optimization
+- Published GitHub repository
+
 ## Usage
 
 At the terminal, type:
