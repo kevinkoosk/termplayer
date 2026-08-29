@@ -1,8 +1,12 @@
-# TermPlayer 0.2.1
+# TermPlayer 0.2.2
 
 Video player for terminal.
 
 Vibe coded, free, and open source.
+
+![screenshot of Termplayer](screenshot.png)
+
+![screenshot of Termplayer](screenshot2.png)
 
 
 ## Usage
@@ -13,7 +17,7 @@ At the terminal, type:
 termplayer video.mp4
 ```
 
-During playback, type "q" followed by <Enter> to quit. 
+During playback, use "Q" to quit, and Spacebar to pause.
 
 
 ## Compiling
@@ -28,7 +32,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version introduces an FPS overlay so that you know how many "frames per second" you are getting. But the way the FPS appears at the bottom, is a hack solution. Not perfect.
+FFMPEG continues to process the video in the backend, so the video shouldn't be paused for too long. (Even though it's possible to pause, the buffer gets clogged up eventually.)
 
 ## About this app
 

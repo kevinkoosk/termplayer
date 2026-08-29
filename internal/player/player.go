@@ -11,7 +11,14 @@ import (
 
 func Play(video string) error {
 
-	quit := ListenForQuit()
+	cmdChan, restore, err :=
+		StartKeyboard()
+
+	if err != nil {
+		return err
+	}
+
+	defer restore()
 
 	stream, err := decoder.New(video)
 
@@ -25,6 +32,7 @@ func Play(video string) error {
 	framesRendered := 0
 	fps := 0.0
 	fpsTimer := time.Now()
+	paused := false
 
 	frameDuration := time.Second / 10
 
@@ -33,14 +41,30 @@ func Play(video string) error {
 	for {
 
 		select {
+	
+		case cmd := <-cmdChan:
 
-		case <-quit:
-			return nil
+			switch cmd {
 
+			case CmdQuit:
+				return nil
+
+			case CmdPause:
+				paused = !paused
+			}
 		default:
 		}
 
 		start := time.Now()
+
+		if paused {
+
+			time.Sleep(
+				50 * time.Millisecond,
+			)
+
+			continue
+		}
 
 		frame, err := stream.NextFrame()
 
@@ -73,7 +97,7 @@ func Play(video string) error {
 
 		// Draw FPS on top row
 		fmt.Printf(
-			"\x1b[-2;1HFPS: %.1f   (Q + Enter to quit)",
+			"\x1b[-2;1HFPS: %.1f  | Q Quit | Space Pause   ",
 			fps,
 		)
 
