@@ -1,4 +1,4 @@
-# TermPlayer 0.2.5
+# TermPlayer 0.3.0
 
 Video player for terminal.
 
@@ -22,6 +22,7 @@ Vibe coded, free, and open source.
 - Pause support
 - Hidden cursor
 - Renderer optimization
+- Portrait mode!!
 - Silent (no sound yet)
 
 ## Usage
@@ -47,12 +48,11 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-In the last version (0.2.4) we used strings.Builder which helped optimize the rendering and made the player smoother. In this version (0.2.5), we drop frames to enhance the user experience. 
-
+Managed to get Portrait Mode working. It involved changes in the decoder, renderer, and player.
 
 ## About this app
 
-Copyright Kevin Koo Seng Kiat (C) 2026 with coding assistance from Microsoft Copilot.
+Copyright Kevin Koo Seng Kiat (C) 2026 with coding assistance from Microsoft Copilot and Gemini (v. 0.3.0 decoder).
 
 ## Licence
 

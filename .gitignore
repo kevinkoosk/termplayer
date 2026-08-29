@@ -1,4 +1,6 @@
 # .gitignore
+*.ori
+*.txt
 *.exe
 *.exe~
 *.dll

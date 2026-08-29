@@ -23,7 +23,11 @@ func Play(video string) error {
 
 	defer restore()
 
-	stream, err := decoder.New(video)
+	stream, err := decoder.New(
+		video,
+		160,
+		90,
+	)
 
 	if err != nil {
 		fmt.Println(err)

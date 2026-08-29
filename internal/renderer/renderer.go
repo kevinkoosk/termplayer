@@ -21,10 +21,35 @@ return fmt.Sprintf(
 
 func Draw(img image.Image, width, height int) {
 
+	imgW := img.Bounds().Dx()
+	imgH := img.Bounds().Dy()
+	
+	ratio :=
+		float64(imgW) /
+			float64(imgH)
+	renderW := width
+	
+	renderH :=
+		int(
+			float64(renderW) /
+				ratio,
+	)
+	
+	if renderH > height*2 {
+
+		renderH = height * 2
+
+		renderW =
+			int(
+				float64(renderH) * 
+					ratio,
+			)
+	}
+
 	resized :=
 		resize.Resize(
-			uint(width),
-			uint(height*2),
+			uint(renderW),
+			uint(renderH),
 			img,
 			resize.Lanczos3,
 		)
