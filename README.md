@@ -8,8 +8,6 @@ Also displays images.
 
 ![screenshot of Termplayer](screenshot2.png)
 
-![recording of Termplayer](screenrecording.gif)
-
 ## Feature set
 
 - RGB24 decoding
