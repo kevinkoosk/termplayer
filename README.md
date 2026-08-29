@@ -1,4 +1,4 @@
-# TermPlayer 0.2
+# TermPlayer 0.2.1
 
 Video player for terminal.
 
@@ -13,7 +13,7 @@ At the terminal, type:
 termplayer video.mp4
 ```
 
-Type "q" followed by <Enter> to quit. 
+During playback, type "q" followed by <Enter> to quit. 
 
 
 ## Compiling
@@ -28,7 +28,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version is more efficient than the previous version due to improved code for scaling and rendering.
+This version introduces an FPS overlay so that you know how many "frames per second" you are getting. But the way the FPS appears at the bottom, is a hack solution. Not perfect.
 
 ## About this app
 
