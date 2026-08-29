@@ -11,6 +11,9 @@ import (
 
 func Play(video string) error {
 
+	fmt.Print("\x1b[?25l")
+	defer fmt.Print("\x1b[?25h")
+
 	cmdChan, restore, err :=
 		StartKeyboard()
 

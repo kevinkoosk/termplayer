@@ -1,4 +1,4 @@
-# TermPlayer 0.2.2
+# TermPlayer 0.2.3
 
 Video player for terminal.
 
@@ -32,7 +32,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-FFMPEG continues to process the video in the backend, so the video shouldn't be paused for too long. (Even though it's possible to pause, the buffer gets clogged up eventually.)
+Notice the screenshots in version 0.2.2 have a cursor? In version 0.2.3 we hide it until you exit the app. Then we show it again.
 
 ## About this app
 
