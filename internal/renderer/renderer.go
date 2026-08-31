@@ -6,6 +6,7 @@ import (
 	"image/color"
 	"strings"
 	"github.com/nfnt/resize"
+	"github.com/kevinkoosk/termplayer/internal/config"
 )
 
 func ansiFgBg(fg, bg color.Color) string {
@@ -24,6 +25,11 @@ func Draw(img image.Image, width, height int) {
 	imgW := img.Bounds().Dx()
 	imgH := img.Bounds().Dy()
 	
+	scale :=
+	float64(
+		config.ScalePercent,
+	) / 100.0
+	
 	ratio :=
 		float64(imgW) /
 			float64(imgH)
@@ -35,6 +41,7 @@ func Draw(img image.Image, width, height int) {
 				ratio,
 	)
 	
+	
 	if renderH > height*2 {
 
 		renderH = height * 2
@@ -44,6 +51,26 @@ func Draw(img image.Image, width, height int) {
 				float64(renderH) * 
 					ratio,
 			)
+	}
+
+	renderW =
+	int(
+		float64(renderW) *
+			scale,
+	)
+
+	renderH =
+		int(
+			float64(renderH) *
+				scale,
+		)
+
+		if renderW < 1 {
+		renderW = 1
+	}
+
+	if renderH < 1 {
+		renderH = 1
 	}
 
 	resized :=

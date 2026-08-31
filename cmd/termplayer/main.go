@@ -5,9 +5,11 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"strconv"
 
 	"github.com/kevinkoosk/termplayer/internal/picture"
 	"github.com/kevinkoosk/termplayer/internal/player"
+	"github.com/kevinkoosk/termplayer/internal/config"
 )
 
 func main() {
@@ -20,6 +22,32 @@ func main() {
 
 		return
 	}
+	
+	for i := 1; i < len(os.Args); i++ {
+
+	if os.Args[i] == "--scale" &&
+		i+1 < len(os.Args) {
+
+		scale, err :=
+			strconv.Atoi(
+				os.Args[i+1],
+			)
+
+		if err == nil {
+
+			if scale < 25 {
+				scale = 25
+			}
+
+			if scale > 150 {
+				scale = 150
+			}
+
+			config.ScalePercent =
+				scale
+		}
+	}
+}
 
 	ext := strings.ToLower(
 		filepath.Ext(

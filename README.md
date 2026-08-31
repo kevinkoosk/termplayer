@@ -43,6 +43,23 @@ If you want to view an image instead, type:
 termplayer image.jpg
 ```
 
+## Scaling
+
+You can choose to scale it between 25% to 125%. 
+
+```
+termplayer video.mp4 --scale 60
+```
+This scales a video playback to 60%.
+
+You can also do it for a picture:
+
+```
+termplayer image.jpg --scale 50
+```
+The image is displayed at 50% scale.
+
+If you put in an argument above 125, it's set at 125. If you put in a number 25, it's set at 25.
 
 
 ## Compiling
@@ -57,7 +74,9 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version was focused on the auto-resizing capability. Surprisingly, we found that the app could already resize its output when the terminal window is resized. But on reflection, it was to be expected - we calculate the window size to render. The code for 0.3.2 is exactly the same as 0.3.1. But a milestone has been achieved.
+This version was focused on the auto-resizing capability. Surprisingly, we found that the app could already resize its output when the terminal window is resized. But on reflection, it was to be expected - we calculate the window size to render. 
+
+So we shipped another feature called scaling. Now you can playback videos or display images at a scale between 25% to 125%. But I don't recommend going beyong the 100% for horizontal videos and images. 
 
 ## About this app
 
