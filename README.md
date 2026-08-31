@@ -1,4 +1,4 @@
-# TermPlayer 0.3.2
+# TermPlayer 0.3.3
 
 Video player for terminal. Vibe coded, free, and open source.
 
@@ -26,6 +26,7 @@ Also displays images.
 - Also displays images (jpg, png, gif)
 - Player auto-resizes as you resize the window
 - Silent (no sound yet)
+- LOOPING
 
 ## Usage
 
@@ -61,6 +62,14 @@ The image is displayed at 50% scale.
 
 If you put in an argument above 125, it's set at 125. If you put in a number 25, it's set at 25.
 
+## Looping
+
+Simply add "--looping" as an argument.
+
+```
+termplayer video.mp4 --looping
+```
+
 
 ## Compiling
 
@@ -74,9 +83,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version was focused on the auto-resizing capability. Surprisingly, we found that the app could already resize its output when the terminal window is resized. But on reflection, it was to be expected - we calculate the window size to render. 
-
-So we shipped another feature called scaling. Now you can playback videos or display images at a scale between 25% to 125%. But I don't recommend going beyong the 100% for horizontal videos and images. 
+This version we added looping!
 
 ## About this app
 

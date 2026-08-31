@@ -3,11 +3,15 @@
 import (
 	"fmt"
 	"time"
+	"errors"
 
 	"github.com/kevinkoosk/termplayer/internal/decoder"
 	"github.com/kevinkoosk/termplayer/internal/renderer"
 	"github.com/kevinkoosk/termplayer/internal/terminal"
 )
+
+var ErrQuit =
+	errors.New("quit requested")
 
 func Play(video string) error {
 
@@ -55,7 +59,7 @@ func Play(video string) error {
 			switch cmd {
 
 			case CmdQuit:
-				return nil
+				return ErrQuit
 
 			case CmdPause:
 				paused = !paused

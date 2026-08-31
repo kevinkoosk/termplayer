@@ -1,83 +1,102 @@
 ﻿package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 	"strconv"
+	"strings"
 
+	"github.com/kevinkoosk/termplayer/internal/config"
 	"github.com/kevinkoosk/termplayer/internal/picture"
 	"github.com/kevinkoosk/termplayer/internal/player"
-	"github.com/kevinkoosk/termplayer/internal/config"
 )
 
 func main() {
-
-	if len(os.Args) < 2 {
-
-		fmt.Println(
-			"usage: termplayer file",
-		)
-
-		return
+	file, err := parseArgs(os.Args[1:])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		fmt.Fprintln(os.Stderr, "usage: termplayer [--loop] [--scale percent] file")
+		os.Exit(2)
 	}
-	
-	for i := 1; i < len(os.Args); i++ {
 
-	if os.Args[i] == "--scale" &&
-		i+1 < len(os.Args) {
+	ext := strings.ToLower(filepath.Ext(file))
 
-		scale, err :=
-			strconv.Atoi(
-				os.Args[i+1],
-			)
+	switch ext {
+	case ".jpg", ".jpeg", ".png", ".gif":
+		if err := picture.Show(file); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 
-		if err == nil {
-
-			if scale < 25 {
-				scale = 25
+	default:
+		for {
+			err := player.Play(file)
+			if errors.Is(err, player.ErrQuit) {
+				return
 			}
-
-			if scale > 150 {
-				scale = 150
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
 			}
-
-			config.ScalePercent =
-				scale
+			if !config.LoopPlayback {
+				return
+			}
 		}
 	}
 }
 
-	ext := strings.ToLower(
-		filepath.Ext(
-			os.Args[1],
-		),
-	)
+func parseArgs(args []string) (string, error) {
+	var file string
 
-	switch ext {
+	for i := 0; i < len(args); i++ {
+		arg := args[i]
 
-	case ".jpg",
-		".jpeg",
-		".png",
-		".gif":
+		switch {
+		case arg == "--":
+			// everything after -- is the file path, even if it looks like a flag
+			if i+1 >= len(args) {
+				return "", fmt.Errorf("missing file")
+			}
+			if file != "" {
+				return "", fmt.Errorf("unexpected extra argument: %s", args[i+1])
+			}
+			return args[i+1], nil
 
-		err := picture.Show(
-			os.Args[1],
-		)
+		case arg == "--loop":
+			config.LoopPlayback = true
 
-		if err != nil {
-			panic(err)
-		}
+		case arg == "--scale":
+			if i+1 >= len(args) {
+				return "", fmt.Errorf("--scale needs a number")
+			}
+			i++
+			scale, err := strconv.Atoi(args[i])
+			if err != nil {
+				return "", fmt.Errorf("invalid --scale: %s", args[i])
+			}
+			if scale < 25 {
+				scale = 25
+			}
+			if scale > 150 {
+				scale = 150
+			}
+			config.ScalePercent = scale
 
-	default:
+		case strings.HasPrefix(arg, "-"):
+			return "", fmt.Errorf("unknown flag: %s", arg)
 
-		err := player.Play(
-			os.Args[1],
-		)
-
-		if err != nil {
-			panic(err)
+		default:
+			if file != "" {
+				return "", fmt.Errorf("unexpected extra argument: %s", arg)
+			}
+			file = arg
 		}
 	}
+
+	if file == "" {
+		return "", fmt.Errorf("missing file")
+	}
+	return file, nil
 }
