@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 	"errors"
-
+	"github.com/kevinkoosk/termplayer/internal/config"
 	"github.com/kevinkoosk/termplayer/internal/decoder"
 	"github.com/kevinkoosk/termplayer/internal/renderer"
 	"github.com/kevinkoosk/termplayer/internal/terminal"
@@ -63,6 +63,32 @@ func Play(video string) error {
 
 			case CmdPause:
 				paused = !paused
+
+			case CmdZoomIn:
+			    config.ScalePercent += 10
+
+			    if config.ScalePercent > 150 {
+			        config.ScalePercent = 150
+			    }
+
+			case CmdZoomOut:
+			    config.ScalePercent -= 10
+
+			    if config.ScalePercent < 25 {
+			        config.ScalePercent = 25
+			    }
+
+			case CmdZoomReset:
+
+			    config.ScalePercent = 100
+
+			case CmdHud:
+
+			    config.HudMode++
+
+			    if config.HudMode > 2 {
+			        config.HudMode = 0
+			    }
 			}
 		default:
 		}
@@ -107,12 +133,30 @@ func Play(video string) error {
 			fpsTimer = time.Now()
 		}
 
-		// Draw FPS on top row
-		fmt.Printf(
-			"\x1b[-2;1HFPS: %.1f | Drop: %d | Q Quit | Space Pause   ",
-			fps,
-			framesDropped,
-		)
+		switch config.HudMode {
+
+		case 0:
+
+		    fmt.Printf(
+		        "\x1b[-2;1HQ Quit | Space Pause | +/- Zoom | 0 Reset | Tab HUD  ",
+		    )
+
+		case 1:
+
+		    fmt.Printf(
+		        "\x1b[-2;1HFPS: %.1f | Drop: %d | Scale: %d%%                  ",
+		        fps,
+		        framesDropped,
+		        config.ScalePercent,
+		    )
+
+		case 2:
+
+		    fmt.Printf(
+		        "                                                               ",
+		    )
+		    // no HUD
+		}
 
 		elapsed := time.Since(start)
 

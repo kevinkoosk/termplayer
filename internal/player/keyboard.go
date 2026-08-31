@@ -12,6 +12,10 @@ const (
 	CmdNone Command = iota
 	CmdQuit
 	CmdPause
+	CmdZoomIn
+	CmdZoomOut
+	CmdZoomReset
+	CmdHud
 )
 
 func StartKeyboard() (chan Command, func(), error) {
@@ -52,6 +56,18 @@ func StartKeyboard() (chan Command, func(), error) {
 
 			case ' ':
 				cmdChan <- CmdPause
+
+			case '+':
+			    cmdChan <- CmdZoomIn
+			
+			case '-':
+			    cmdChan <- CmdZoomOut
+			
+			case '0':
+			    cmdChan <- CmdZoomReset
+			
+			case '\t':
+			    cmdChan <- CmdHud
 			}
 		}
 	}()
