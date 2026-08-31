@@ -144,7 +144,7 @@ func Play(video string) error {
 		case 1:
 
 		    fmt.Printf(
-		        "\x1b[-2;1HFPS: %.1f | Drop: %d | Scale: %d%%                  ",
+		        "\x1b[-2;1HFPS: %.1f | Drop: %d | Scale: %d%%                       ",
 		        fps,
 		        framesDropped,
 		        config.ScalePercent,
@@ -153,7 +153,7 @@ func Play(video string) error {
 		case 2:
 
 		    fmt.Printf(
-		        "                                                               ",
+		        "\x1b[2K                                                               ",
 		    )
 		    // no HUD
 		}
