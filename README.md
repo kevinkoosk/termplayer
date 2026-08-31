@@ -1,4 +1,4 @@
-# TermPlayer 0.3.3
+# TermPlayer 0.3.4
 
 Video player for terminal. Vibe coded, free, and open source.
 
@@ -29,6 +29,8 @@ Also displays images.
 - LOOPING
 - Clean exit when "Q" is pressed during looping
 - Arguments can be in any order
+- Toggle the HUD display with Tab
+- Zoom with +/- (use numpad!) or reset with 0
 
 ## Usage
 
@@ -85,7 +87,7 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version we added looping! Stronger argument parsing too. Previously you needed the filename to be the first argument; it can now be the second or third argument. This clears the way for future arguments to be added for CLI usage.
+This version (0.3.4) we added HUD toggle and zooming (+/- or 0 to reset).
 
 ## About this app
 
