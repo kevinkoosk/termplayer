@@ -27,6 +27,8 @@ Also displays images.
 - Player auto-resizes as you resize the window
 - Silent (no sound yet)
 - LOOPING
+- Clean exit when "Q" is pressed during looping
+- Arguments can be in any order
 
 ## Usage
 
@@ -46,7 +48,7 @@ termplayer image.jpg
 
 ## Scaling
 
-You can choose to scale it between 25% to 125%. 
+You can choose to scale it between 25% to 125%. Add "--scale xx" where xx is a number.
 
 ```
 termplayer video.mp4 --scale 60
@@ -83,11 +85,11 @@ go build -o termplayer.exe ./cmd/termplayer
 
 ## Notes
 
-This version we added looping!
+This version we added looping! Stronger argument parsing too. Previously you needed the filename to be the first argument; it can now be the second or third argument. This clears the way for future arguments to be added for CLI usage.
 
 ## About this app
 
-Copyright Kevin Koo Seng Kiat (C) 2026 with coding assistance from Microsoft Copilot and Gemini (v. 0.3.0 decoder).
+Copyright Kevin Koo Seng Kiat (C) 2026 with coding assistance from Microsoft Copilot and Gemini (v. 0.3.0 decoder) and Grok (v 0.3.3 main.go major cleanup).
 
 ## Licence
 
